@@ -1,5 +1,8 @@
 FROM mcr.microsoft.com/devcontainers/python:1-3.13
 
+# Remove yarn repo with expired GPG key to prevent apt-get update failures
+RUN rm -f /etc/apt/sources.list.d/yarn.list || true
+
 # Install common system dependencies needed for scientific Python packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
